@@ -147,7 +147,7 @@ public class AvailableRoomPage extends javax.swing.JFrame {
         jLabel6.setText("Inclusions");
 
         jLabel7.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
-        jLabel7.setText("Price");
+        jLabel7.setText("Price (₱)");
 
         jLabel4.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
         jLabel4.setText("Room Classification");
@@ -382,12 +382,9 @@ public class AvailableRoomPage extends javax.swing.JFrame {
 
     private void PickRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickRoomBtnActionPerformed
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
-         PreparedStatement stmt = con.prepareStatement("UPDATE addedroomdb SET Available = ? WHERE RoomClassification = ? AND RoomNumber = ?");
-         PreparedStatement priceStmt = con.prepareStatement("SELECT Price FROM addedroomdb WHERE RoomClassification = ? AND RoomNumber = ?")) {
-
-        // Load MySQL JDBC Driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        System.out.println("Database Connected Successfully!!!");
+        PreparedStatement stmt = con.prepareStatement("UPDATE addedroomdb SET Available = ? WHERE RoomClassification = ? AND RoomNumber = ?");
+        PreparedStatement priceStmt = con.prepareStatement("SELECT Price FROM addedroomdb WHERE RoomClassification = ? AND RoomNumber = ?");
+        PreparedStatement availableStmt = con.prepareStatement("SELECT Available FROM addedroomdb WHERE RoomClassification = ? AND RoomNumber = ?")) {
 
         // Get selected items from JComboBox
         String selectedRoomClassification = (String) RoomClassification.getSelectedItem();
@@ -398,17 +395,34 @@ public class AvailableRoomPage extends javax.swing.JFrame {
             return; // Exit the method if room selection is invalid
         }
 
+        // Check if the room is available
+        availableStmt.setString(1, selectedRoomClassification);
+        availableStmt.setString(2, selectedRoomNumber);
+        try (ResultSet availableRs = availableStmt.executeQuery()) {
+            if (availableRs.next()) {
+                boolean isAvailable = availableRs.getBoolean("Available");
+                if (!isAvailable) {
+                    JOptionPane.showMessageDialog(this, "Sorry, the selected room is not available for booking.", "Room Not Available", JOptionPane.WARNING_MESSAGE);
+                    return; // Exit the method if room is not available
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to check room availability.", "Error", JOptionPane.ERROR_MESSAGE);
+                return; // Exit the method if availability check fails
+            }
+        }
+
         // Get the price of the selected room
         priceStmt.setString(1, selectedRoomClassification);
         priceStmt.setString(2, selectedRoomNumber);
-        ResultSet rs = priceStmt.executeQuery();
-        if (rs.next()) {
-            double roomPrice = rs.getDouble("Price");
-            totalRoomPrice += roomPrice; // Add the price to the total
+        try (ResultSet rs = priceStmt.executeQuery()) {
+            if (rs.next()) {
+                double roomPrice = rs.getDouble("Price");
+                totalRoomPrice += roomPrice; // Add the price to the total
+            }
         }
 
         // Prepare and execute the SQL query to update room availability
-        stmt.setBoolean(1, true); // Set Available to true
+        stmt.setBoolean(1, false); // Set Available to false
         stmt.setString(2, selectedRoomClassification);
         stmt.setString(3, selectedRoomNumber);
         int rowsAffected = stmt.executeUpdate();
@@ -419,15 +433,17 @@ public class AvailableRoomPage extends javax.swing.JFrame {
             RoomNumber.removeItem(selectedRoomNumber);
             roomPicked = true;
         } else {
-            JOptionPane.showMessageDialog(this, "Failed to pick room.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Failed to pick room. No rows were affected.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (ClassNotFoundException e) {
-        Logger.getLogger(AvailableRoomPage.class.getName()).log(Level.SEVERE, "MySQL JDBC Driver not found", e);
-        JOptionPane.showMessageDialog(this, "MySQL JDBC Driver not found: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     } catch (SQLException e) {
         Logger.getLogger(AvailableRoomPage.class.getName()).log(Level.SEVERE, "SQL Error", e);
         JOptionPane.showMessageDialog(this, "SQL Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        Logger.getLogger(AvailableRoomPage.class.getName()).log(Level.SEVERE, "Error", e);
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
+
+
     }//GEN-LAST:event_PickRoomBtnActionPerformed
 
     private void PaymentBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaymentBtnMouseClicked
