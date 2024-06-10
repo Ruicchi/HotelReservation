@@ -13,22 +13,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-import com.toedter.calendar.JCalendar;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 public class CheckInPage extends javax.swing.JFrame {
     private Timer debounceTimer;
@@ -42,10 +38,25 @@ public class CheckInPage extends javax.swing.JFrame {
 
         jTimeCheckOut.setEditable(false);
         
-        jCalendar.addPropertyChangeListener("calendar", e -> updateCheckOut());
-        jTime.addActionListener(e -> updateCheckOut());
-        jStay.addActionListener(e -> updateCheckOut());
-        
+        jCalendar.addPropertyChangeListener("calendar", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                updateCheckOut();
+            }
+        });
+        jTime.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateCheckOut();
+            }
+        });
+        jStay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateCheckOut();
+            }
+        });
+    
         jContact.setText("+63 ");
         
         jContact.addKeyListener(new KeyAdapter() {
@@ -108,43 +119,23 @@ public class CheckInPage extends javax.swing.JFrame {
     }
     
     private void updateCheckOut() {
-    Date checkInDate = jCalendar.getDate();
-    String checkInHourStr = (String) jTime.getSelectedItem();
-    String stayDaysStr = (String) jStay.getSelectedItem();
+        Date checkInDate = jCalendar.getDate();
+        String checkInHourStr = (String) jTime.getSelectedItem();
+        String stayDaysStr = (String) jStay.getSelectedItem();
 
-    // Extract hour from the time string (e.g., "1:00" -> 1)
-    int checkInHour = Integer.parseInt(checkInHourStr.split(":")[0]);
-    int stayDays = Integer.parseInt(stayDaysStr);
+        int checkInHour = Integer.parseInt(checkInHourStr.split(":")[0]);
+        int stayDays = Integer.parseInt(stayDaysStr);
 
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTime(checkInDate);
-    calendar.set(Calendar.HOUR_OF_DAY, checkInHour);
-    calendar.add(Calendar.DAY_OF_MONTH, stayDays);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(checkInDate);
+        calendar.set(Calendar.HOUR_OF_DAY, checkInHour);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.add(Calendar.DAY_OF_MONTH, stayDays);
 
-    // Using "MMMM d, yyyy / HH:mm" for textual month format
-    SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy / HH:mm");
-    String checkOutDate = dateFormat.format(calendar.getTime());
-    jTimeCheckOut.setText(checkOutDate);
-    
-    getHoursArrayWithColon();
-    getDaysArrayAsString();
-}
-
-    private String[] getHoursArrayWithColon() {
-    String[] hours = new String[24];
-    for (int i = 0; i < 24; i++) {
-        hours[i] = (i + 1) + ":00"; // Adding the colon and minutes
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy / HH:mm");
+        String checkOutDate = dateFormat.format(calendar.getTime());
+        jTimeCheckOut.setText(checkOutDate);
     }
-    return hours;
-}
-
-    private String[] getDaysArrayAsString() {
-    String[] days = new String[31];
-    for (int i = 0; i < 31; i++) {
-        days[i] = String.valueOf(i + 1);
-    }
-    return days;
-}
     
     private void debounceCapitalization() {
     if (debounceTimer != null) {
@@ -478,18 +469,35 @@ public class CheckInPage extends javax.swing.JFrame {
 }
     
     public String validateEmail(String email) {
-        if (email.endsWith("@gmail.com")) {
-            return email;
-        } else {
-            return "Invalid Email";
-        }
+    String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$";
+    if (email.matches(regex)) {
+        return email;
+    } else {
+        return "Invalid Email";
     }
+}
     
     public String validateIDType(String idType) {
         if ("- Select an ID Type -".equals(idType)) {
             return "Please Select a valid ID Type";
         } else {
             return idType;
+        }
+    }
+    
+     public String validateCheckInTime(String checkInTime) {
+        if ("- Select Time of Check In -".equals(checkInTime)) {
+            return "Please Select a valid Time of Check in";
+        } else {
+            return "Invalid Time of Check in";
+        }
+     }
+    
+    public String validateDaysOfStay(String daysOfStay) {
+        if ("- Select Days of Stay -".equals(daysOfStay)) {
+            return "Please Select a valid Days of Stay";
+        } else {
+            return "Invalid Days of Stay";
         }
     }
     
@@ -510,48 +518,6 @@ public class CheckInPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jStayActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-    boolean isValid = true;
-
-    //Check if text field is empty for NAME
-    if (jName.getText().isEmpty()) {
-        isValid = false;
-    }
-
-    //Check if text field is empty for CONTACT NO.
-    if (jContact.getText().isEmpty()) {
-        isValid = false;
-    }
-
-    //Check if text field is empty for EMAIL
-    if (jEmail.getText().isEmpty()) {
-        isValid = false;
-    }
-
-    //Check if option is picked for ID Type
-    if (jID.getSelectedIndex() == 0) {
-        isValid = false;
-    }
-
-    //Check if option is picked for No. of days of stay
-    if (jTime.getSelectedIndex() == 0) {
-        isValid = false;
-    }
-
-    // Check if a date is picked for check in
-    if (jCalendar.getDate() == null) {
-        isValid = false;
-    }
-
-    //Check if text field is empty for CHECK IN TIME
-    if (jTimeCheckOut.getText().isEmpty()) {
-        isValid = false;
-    }
-
-    if (!isValid) {
-        JOptionPane.showMessageDialog(null, "Please fill out all fields.");
-    } 
-
- 
     String name = jName.getText();
     String contact = jContact.getText();
     String email = jEmail.getText();
@@ -562,7 +528,15 @@ public class CheckInPage extends javax.swing.JFrame {
     int month = dateOfCheckIn.getMonth() + 1;
     int day = dateOfCheckIn.getDate();
     String timeOfCheckIn = (String) jTime.getSelectedItem();
+    if (timeOfCheckIn.equals("- Select Time of Check-In -")) {
+        JOptionPane.showMessageDialog(null, "Please select a valid time of check-in.");
+    }
+
     String daysOfStay = (String) jStay.getSelectedItem();
+    if (daysOfStay.equals("- Select Days of Stay -")) {
+        JOptionPane.showMessageDialog(null, "Please select a valid number of days.");
+    }
+    
     String dateTimeOfCheckOut = (String) jTimeCheckOut.getText();
             
     StringBuilder errors = new StringBuilder();
@@ -583,41 +557,91 @@ public class CheckInPage extends javax.swing.JFrame {
             case 12: monthString = "December"; break;
         }
         
-    // Validate Name
-    if (name.trim().isEmpty()) {
-        errors.append("Name cannot be empty.\n");
-    } else if (!name.matches("^[a-zA-Z ]+$")) {
-        errors.append("Name can only contain letters and spaces.\n");
-    }
-
-    // Validate Contact
-    String validatedContact = validateContact(contact);
-    if (validatedContact.equals("Invalid Number")) {
-        errors.append("Contact number must be exactly 10 digits.\n");
-    }
-
-    // Validate Email
-    String validatedEmail = validateEmail(email);
-    if (validatedEmail.equals("Invalid Email")) {
-        errors.append("Email must end with @gmail.com.\n");
-    }
-
-    // Validate Proof of ID
-    if (proofOfID.equals("- Select an ID Type -")) {
-        errors.append("Please select a valid Proof of ID.\n");
-    }
-
-    // Check if there are any errors
-    if (errors.length() > 0) {
-        // Show error messages and prevent navigation
-        JOptionPane.showMessageDialog(this, errors.toString(), "Validation Errors", JOptionPane.ERROR_MESSAGE);
-    } else {
-        // Proceed to the next page or handle the validated input
-        JOptionPane.showMessageDialog(this, "Name: " + name + "\nContact: " + validatedContact + "\nEmail: " + validatedEmail + "\nProof of ID: " + proofOfID + "\nDate of Check in: " + monthString + " " + day + "\nTime of Check in: " + timeOfCheckIn + "\nDays of Stay: " + daysOfStay);
-        
-    }
     try {
-        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+        boolean isValid = true;
+        boolean dateIsValid = true;
+        //Check if text field is empty for NAME
+        if (jName.getText().isEmpty()) {
+            isValid = false;
+        }
+
+        //Check if text field is empty for CONTACT NO.
+        if (jContact.getText().isEmpty()) {
+            isValid = false;
+        }
+
+        //Check if text field is empty for EMAIL
+        if (jEmail.getText().isEmpty()) {
+            isValid = false;
+        }
+
+        //Check if option is picked for ID Type
+        if (jID.getSelectedIndex() == 0) {
+            isValid = false;
+        }
+
+        //Check if option is picked for No. of days of stay
+        if (jTime.getSelectedIndex() == 0) {
+            isValid = false;
+        }
+
+        // Check if a date is picked for check in
+        if (jCalendar.getDate() == null) {
+            isValid = false;
+        }
+
+        //Check if text field is empty for CHECK IN TIME
+        if (jTimeCheckOut.getText().isEmpty()) {
+            isValid = false;
+        }
+        
+        Date currentDate = new Date();
+        if (jCalendar.getDate() == null || jCalendar.getDate().before(currentDate)) {
+        dateIsValid = false;
+        }
+
+        if (!isValid) {
+            JOptionPane.showMessageDialog(null, "Please fill out all fields.");
+        } 
+        
+         if (!dateIsValid) {
+            JOptionPane.showMessageDialog(null, "Please fill out all fields correctly and ensure check-in date is not in the past.");
+        return;
+        }
+         
+        // Validate Name
+        if (name.trim().isEmpty()) {
+            errors.append("Name cannot be empty.\n");
+        } else if (!name.matches("^[a-zA-Z ]+$")) {
+            errors.append("Name can only contain letters and spaces.\n");
+        }
+
+        // Validate Contact
+        String validatedContact = validateContact(contact);
+        if (validatedContact.equals("Invalid Number")) {
+            errors.append("Contact number must be exactly 10 digits.\n");
+        }
+
+        // Validate Email
+        String validatedEmail = validateEmail(email);
+        if (validatedEmail.equals("Invalid Email")) {
+            errors.append("Email address does not meet the required format.\n");
+        }
+
+        // Validate Proof of ID
+        if (proofOfID.equals("- Select an ID Type -")) {
+            errors.append("Please select a valid Proof of ID.\n");
+        }
+        
+        // Check if there are any errors
+        if (errors.length() > 0) {
+            // Show error messages and prevent navigation
+            JOptionPane.showMessageDialog(this, errors.toString(), "Validation Errors", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Proceed to the next page or handle the validated input
+            JOptionPane.showMessageDialog(this, "Name: " + name + "\nContact: " + validatedContact + "\nEmail: " + validatedEmail + "\nProof of ID: " + proofOfID + "\nDate of Check in: " + monthString + " " + day + "\nTime of Check in: " + timeOfCheckIn + "\nDays of Stay: " + daysOfStay);
+            
+            try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
             String query = "INSERT INTO guestdb (Name, Contact, Email, IDType, DaysOfStay, DateOfCheckIn, TimeOfCheckIn, DateTimeOfCheckOut) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, name);
@@ -629,17 +653,20 @@ public class CheckInPage extends javax.swing.JFrame {
             preparedStatement.setString(7, timeOfCheckIn);
             preparedStatement.setString(8, dateTimeOfCheckOut);
             preparedStatement.executeUpdate();
+            
             JOptionPane.showMessageDialog(this, "Check-In successful!");
+            
+            AvailableRoomPage x = new AvailableRoomPage();
+            String selectedDays = (String) CheckInPage.jStay.getSelectedItem();
+            x.jDayStay.setText(selectedDays);
+            x.setVisible(true);
+            }
         }
-} catch (SQLException ex) {
+    } catch (SQLException ex) {
     ex.printStackTrace();
     JOptionPane.showMessageDialog(this, "Error: Check-In failed.");
-}
+    }   
     
-    AvailableRoomPage x = new AvailableRoomPage();
-    String selectedDays = (String) CheckInPage.jStay.getSelectedItem();
-    x.jDayStay.setText(selectedDays);
-    x.setVisible(true);
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseClicked
