@@ -17,10 +17,11 @@ import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
-
+import javax.swing.JTextField;
 
 public class AvailableRoomPage extends javax.swing.JFrame {
-    
+    private boolean roomPicked = false;
+    private double totalRoomPrice = 0.0;
     // database connection details
     private static final String DB_URL = "jdbc:mysql://localhost:3306/hotel";
     private static final String DB_USERNAME = "root";
@@ -173,6 +174,11 @@ public class AvailableRoomPage extends javax.swing.JFrame {
         PaymentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PaymentBtnMouseClicked(evt);
+            }
+        });
+        PaymentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PaymentBtnActionPerformed(evt);
             }
         });
 
@@ -368,9 +374,10 @@ public class AvailableRoomPage extends javax.swing.JFrame {
     }
 
     private void PickRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickRoomBtnActionPerformed
-         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
-         PreparedStatement stmt = con.prepareStatement("UPDATE addedroomdb SET Available = ? WHERE RoomClassification = ? AND RoomNumber = ?")) {
-        
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
+         PreparedStatement stmt = con.prepareStatement("UPDATE addedroomdb SET Available = ? WHERE RoomClassification = ? AND RoomNumber = ?");
+         PreparedStatement priceStmt = con.prepareStatement("SELECT Price FROM addedroomdb WHERE RoomClassification = ? AND RoomNumber = ?")) {
+
         // Load MySQL JDBC Driver
         Class.forName("com.mysql.cj.jdbc.Driver");
         System.out.println("Database Connected Successfully!!!");
@@ -384,7 +391,16 @@ public class AvailableRoomPage extends javax.swing.JFrame {
             return; // Exit the method if room selection is invalid
         }
 
-        // Prepare and execute the SQL query
+        // Get the price of the selected room
+        priceStmt.setString(1, selectedRoomClassification);
+        priceStmt.setString(2, selectedRoomNumber);
+        ResultSet rs = priceStmt.executeQuery();
+        if (rs.next()) {
+            double roomPrice = rs.getDouble("Price");
+            totalRoomPrice += roomPrice; // Add the price to the total
+        }
+
+        // Prepare and execute the SQL query to update room availability
         stmt.setBoolean(1, true); // Set Available to true
         stmt.setString(2, selectedRoomClassification);
         stmt.setString(3, selectedRoomNumber);
@@ -394,6 +410,7 @@ public class AvailableRoomPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Room picked successfully!");
             // Remove the selected room from the JComboBox
             RoomNumber.removeItem(selectedRoomNumber);
+            roomPicked = true;
         } else {
             JOptionPane.showMessageDialog(this, "Failed to pick room.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -407,17 +424,25 @@ public class AvailableRoomPage extends javax.swing.JFrame {
     }//GEN-LAST:event_PickRoomBtnActionPerformed
 
     private void PaymentBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaymentBtnMouseClicked
-        try {
-            double numberofDays = Double.parseDouble(jDayStay.getText()); 
-            double pricePerDay = Double.parseDouble(Price.getText()); 
-
-            double totalCost = numberofDays*pricePerDay;
-            BillingPage bp = new BillingPage(totalCost); 
-            bp.setVisible(true);
-        }catch (NumberFormatException ex){
-            JOptionPane.showMessageDialog(null, "Please enter valid numbers for both fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        }
+        
     }//GEN-LAST:event_PaymentBtnMouseClicked
+
+    private void PaymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentBtnActionPerformed
+        if (!roomPicked) {
+        JOptionPane.showMessageDialog(this, "Please pick a room first.", "Action Required", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        double numberofDays = Double.parseDouble(jDayStay.getText());
+
+        double totalCost = numberofDays * totalRoomPrice; // Use totalRoomPrice
+        BillingPage bp = new BillingPage(totalCost);
+        bp.setVisible(true);
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Please enter valid numbers for both fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_PaymentBtnActionPerformed
 
     /**
      * @param args the command line arguments
