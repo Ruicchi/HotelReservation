@@ -33,8 +33,6 @@ import java.sql.ResultSet;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-
-
 public class AddRoomPage extends javax.swing.JFrame {
 
     Connection con = null;
@@ -45,6 +43,9 @@ public class AddRoomPage extends javax.swing.JFrame {
     public AddRoomPage() {
         initComponents();
         setupComboBoxListener();
+        MaxGuest.setEditable(false);
+        Inclusions.setEditable(false);
+        Price.setEditable(false);
     }
 
     private void setupComboBoxListener() {
@@ -341,69 +342,88 @@ public class AddRoomPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void AddRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddRoomBtnActionPerformed
-        String roomClassification = (String) RoomClassification.getSelectedItem();
-        String roomNumber = RoomNumber.getText();
-        String maxGuest = MaxGuest.getText();
-        String inclusions = Inclusions.getText();
-        String price = Price.getText();
+       String roomClassification = (String) RoomClassification.getSelectedItem();
+       String roomNumber = RoomNumber.getText();
+       String maxGuest = MaxGuest.getText();
+       String inclusions = Inclusions.getText();
+       String price = Price.getText();
 
-        String sqlquery = "INSERT INTO addedroomdb (RoomClassification, RoomNumber, MaxGuest, Inclusions, Price, Image) VALUES (?,?,?,?,?,?)";
+       // Validate input fields
+       if (roomClassification == null || roomClassification.trim().isEmpty() ||
+           roomNumber.trim().isEmpty() ||
+           maxGuest.trim().isEmpty() ||
+           inclusions.trim().isEmpty() ||
+           price.trim().isEmpty()) {
+           JOptionPane.showMessageDialog(null, "Please fill in all fields.");
+           return;
+       }
 
-        try {
-            // Load JDBC driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            // Establish connection
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
+       try {
+           // Load JDBC driver
+           Class.forName("com.mysql.cj.jdbc.Driver");
+           // Establish connection
+           con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
 
-            // Prepare statement
-            pst = con.prepareStatement(sqlquery);
-            pst.setString(1, roomClassification);
-            pst.setString(2, roomNumber);
-            pst.setString(3, maxGuest);
-            pst.setString(4, inclusions);
-            pst.setString(5, price);
+           // Check for duplicate room number
+           String checkQuery = "SELECT COUNT(*) FROM addedroomdb WHERE RoomNumber = ?";
+           pst = con.prepareStatement(checkQuery);
+           pst.setString(1, roomNumber);
+           ResultSet rs = pst.executeQuery();
+           if (rs.next() && rs.getInt(1) > 0) {
+               JOptionPane.showMessageDialog(null, "Room number already exists. Please enter a unique room number.");
+               return;
+           }
 
-            if (path2 != null) {
-                InputStream is = new FileInputStream(new File(path2));
-                pst.setBlob(6, is);
-            } else {
-                pst.setBlob(6, (InputStream) null);
-            }
+           // Prepare statement for insertion
+           String sqlquery = "INSERT INTO addedroomdb (RoomClassification, RoomNumber, MaxGuest, Inclusions, Price, Image) VALUES (?,?,?,?,?,?)";
+           pst = con.prepareStatement(sqlquery);
+           pst.setString(1, roomClassification);
+           pst.setString(2, roomNumber);
+           pst.setString(3, maxGuest);
+           pst.setString(4, inclusions);
+           pst.setString(5, price);
 
-            // Execute update
-            int rowsInserted = pst.executeUpdate();
-            if (rowsInserted > 0) {
-                JOptionPane.showMessageDialog(null, "Room Added Successfully!");
+           if (path2 != null) {
+               InputStream is = new FileInputStream(new File(path2));
+               pst.setBlob(6, is);
+           } else {
+               pst.setBlob(6, (InputStream) null);
+           }
 
-                // Add data to jTable1
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();                
-                model.insertRow(0, new Object[]{roomClassification, roomNumber, maxGuest, inclusions, price});
+           // Execute update
+           int rowsInserted = pst.executeUpdate();
+           if (rowsInserted > 0) {
+               JOptionPane.showMessageDialog(null, "Room Added Successfully!");
 
-                // Clear inputs
-                MaxGuest.setText("");
-                RoomNumber.setText("");
-                RoomClassification.setSelectedIndex(-1);
-                Inclusions.setText("");
-                Price.setText("");
-                lbl_photo.setIcon(null);
+               // Add data to jTable1
+               DefaultTableModel model = (DefaultTableModel) jTable1.getModel();                
+               model.insertRow(0, new Object[]{roomClassification, roomNumber, maxGuest, inclusions, price});
 
-                // Call updateRoomDetails() manually to update room details
-                updateRoomDetails();
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed to add room details!");
-            }
+               // Clear inputs
+               MaxGuest.setText("");
+               RoomNumber.setText("");
+               RoomClassification.setSelectedIndex(-1);
+               Inclusions.setText("");
+               Price.setText("");
+               lbl_photo.setIcon(null);
 
-        } catch (ClassNotFoundException | SQLException | FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-            Logger.getLogger(AddRoomPage.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (pst != null) pst.close();
-                if (con != null) con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(AddRoomPage.class.getName()).log(Level.SEVERE, null, ex);
-            }
-}
+               // Call updateRoomDetails() manually to update room details
+               updateRoomDetails();
+           } else {
+               JOptionPane.showMessageDialog(null, "Failed to add room details!");
+           }
+
+       } catch (ClassNotFoundException | SQLException | FileNotFoundException ex) {
+           JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+           Logger.getLogger(AddRoomPage.class.getName()).log(Level.SEVERE, null, ex);
+       } finally {
+           try {
+               if (pst != null) pst.close();
+               if (con != null) con.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(AddRoomPage.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
 
     }//GEN-LAST:event_AddRoomBtnActionPerformed
 
