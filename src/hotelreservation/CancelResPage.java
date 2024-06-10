@@ -1,4 +1,3 @@
-
 package hotelreservation;
 
 import java.awt.Color;
@@ -39,7 +38,7 @@ public class CancelResPage extends javax.swing.JFrame {
      
     }
 
-    void createConnection() throws SQLException {
+    private void createConnection() throws SQLException {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -68,19 +67,19 @@ public class CancelResPage extends javax.swing.JFrame {
         }
     }
 
-    private boolean isRoomAvailable(String roomNumber) {
-    String query = "SELECT NotAvailable FROM addedroomdb WHERE RoomNumber = ?";
+    private boolean isRoomAvailable(String RoomNumber) {
+    String query = "SELECT Available FROM addedroomdb WHERE RoomNumber = ?";
     try {
         PreparedStatement stmt = con.prepareStatement(query);
-        stmt.setString(1, roomNumber);
+        stmt.setString(1, RoomNumber);
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
-            return rs.getBoolean("NotAvailable");
+            return !rs.getBoolean("Available");
         }
     } catch (SQLException e) {
         e.printStackTrace();
     }
-    return false;
+    return true;
 }
 
     /**
@@ -289,7 +288,7 @@ try {
             insertStmt.executeUpdate();
             insertStmt.close();
 
-            PreparedStatement updateStmt = con.prepareStatement("UPDATE addedroomdb SET NotAvailable = TRUE WHERE RoomNumber = ?");
+            PreparedStatement updateStmt = con.prepareStatement("UPDATE addedroomdb SET Available = TRUE WHERE RoomNumber = ?");
             updateStmt.setInt(1, roomNum);
             updateStmt.executeUpdate();
             updateStmt.close();
