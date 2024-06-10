@@ -1,4 +1,3 @@
-
 package hotelreservation;
 
 import java.awt.Color;
@@ -33,12 +32,12 @@ public class CheckOutPage extends javax.swing.JFrame {
      try {
             createConnection();
         } catch (SQLException ex) {
-            Logger.getLogger(CheckOutPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CancelResPage.class.getName()).log(Level.SEVERE, null, ex);
         }
      
     }
 
-    void createConnection() throws SQLException {
+    private void createConnection() throws SQLException {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -61,25 +60,26 @@ public class CheckOutPage extends javax.swing.JFrame {
             }
             rs.close();
             stmt.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(CheckOutPage.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Error retrieving cancellation data!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private boolean isRoomAvailable(String roomNumber) {
-    String query = "SELECT NotAvailable FROM addedroomdb WHERE RoomNumber = ?";
+    private boolean isRoomAvailable(String RoomNumber) {
+    String query = "SELECT Available FROM addedroomdb WHERE RoomNumber = ?";
     try {
         PreparedStatement stmt = con.prepareStatement(query);
-        stmt.setString(1, roomNumber);
+        stmt.setString(1, RoomNumber);
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
-            return rs.getBoolean("NotAvailable");
+            return !rs.getBoolean("Available");
         }
     } catch (SQLException e) {
         e.printStackTrace();
     }
-    return false;
+    return true;
 }
 
     /**
@@ -238,24 +238,24 @@ public class CheckOutPage extends javax.swing.JFrame {
     private void CheckOutConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckOutConfirmActionPerformed
     try {
             // Get current date and time
-            Timestamp dateTime = new Timestamp(System.currentTimeMillis());
-            String roomNumber = RoomNumCO.getText();
+            Timestamp DateTimeOfCheckOut = new Timestamp(System.currentTimeMillis());
+            String RoomNumber = RoomNumCO.getText();
 
             // Input validation
-            if (roomNumber.isEmpty()) {
+            if (RoomNumber.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please enter a room number.");
                 return;
             }
 
-            int roomNum;
+            int RoomNum;
             try {
-                roomNum = Integer.parseInt(roomNumber);
+                RoomNum = Integer.parseInt(RoomNumber);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Please enter a valid room number.");
                 return;
             }
 
-            if (!isRoomAvailable(roomNumber)) {
+            if (!isRoomAvailable(RoomNumber)) {
                 JOptionPane.showMessageDialog(this, "Room is not available or invalid room number.");
                 return;
 }
@@ -267,13 +267,13 @@ public class CheckOutPage extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(CheckOutPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            insertStmt.setInt(1, roomNum);
-            insertStmt.setTimestamp(2, dateTime);
+            insertStmt.setInt(1, RoomNum);
+            insertStmt.setTimestamp(2, DateTimeOfCheckOut);
             insertStmt.executeUpdate();
             insertStmt.close();
 
-            PreparedStatement updateStmt = con.prepareStatement("UPDATE addedroomdb SET NotAvailable = TRUE WHERE RoomNumber = ?");
-            updateStmt.setInt(1, roomNum);
+            PreparedStatement updateStmt = con.prepareStatement("UPDATE addedroomdb SET Available = TRUE WHERE RoomNumber = ?");
+            updateStmt.setInt(1, RoomNum);
             updateStmt.executeUpdate();
             updateStmt.close();
 
