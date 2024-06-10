@@ -6,17 +6,27 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
-import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.io.InputStream;
+import java.sql.Blob;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.swing.ImageIcon;
+
+
 
 public class AvailableRoomPage extends javax.swing.JFrame {
     private boolean roomPicked = false;
@@ -25,12 +35,19 @@ public class AvailableRoomPage extends javax.swing.JFrame {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/hotel";
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "0000";
-    
+
     public AvailableRoomPage() {
         initComponents();
         MaxGuest.setEditable(false);
         Inclusions.setEditable(false);
         Price.setEditable(false);
+        
+        RoomNumber.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            loadRoomDetails();
+        }
+        });
     }
 
     public Connection connect() {
@@ -349,36 +366,94 @@ public class AvailableRoomPage extends javax.swing.JFrame {
         loadRoomDetails();
     }//GEN-LAST:event_RoomNumberActionPerformed
 
-    private void loadRoomDetails() {
+        private void loadRoomDetails() {
         String selectedRoomNumber = (String) RoomNumber.getSelectedItem();
-        
-        Connection conn = connect();
-        if (conn != null) {
-            try {
-                try (Statement stmt = conn.createStatement()) {
-                    String query = "SELECT MaxGuest, Inclusions, Price, Image FROM addedroomdb WHERE RoomNumber = '" + selectedRoomNumber + "'";
-                    ResultSet rs = stmt.executeQuery(query);
-                    
-                    if (rs.next()) {
-                        MaxGuest.setText(rs.getString("MaxGuest"));
-                        Inclusions.setText(rs.getString("Inclusions"));
-                        Price.setText(rs.getString("Price"));
-                        
-                        byte[] imgBytes = rs.getBytes("Image");
-                        if (imgBytes != null) {
-                            ImageIcon imgIcon = new ImageIcon(imgBytes);
-                            lbl_photo.setIcon(imgIcon);
-                        } else {
-                            lbl_photo.setIcon(null);
-                        }
-                    }
-                    rs.close();
-                }
-                conn.close();
-            } catch (SQLException e) {
+
+        try (Connection conn = connect()) {
+            if (conn == null) {
+                return;
             }
+
+            String query = "SELECT MaxGuest, Inclusions, Price, Image FROM addedroomdb WHERE RoomNumber = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, selectedRoomNumber);
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        displayRoomDetails(rs);
+                    } else {
+                        resetRoomDetails();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
+
+        private void displayRoomDetails(ResultSet rs) throws SQLException {
+        MaxGuest.setText(rs.getString("MaxGuest"));
+        Inclusions.setText(rs.getString("Inclusions"));
+        Price.setText(rs.getString("Price"));
+
+        Blob imageBlob = rs.getBlob("Image");
+        if (imageBlob != null) {
+            try (InputStream inputStream = imageBlob.getBinaryStream()) {
+                BufferedImage image = ImageIO.read(inputStream);
+                if (image != null) {
+                    // Reset the icon before setting a new one
+                    lbl_photo.setIcon(null);
+
+                    // Get the dimensions of the label
+                    int labelWidth = lbl_photo.getWidth();
+                    int labelHeight = lbl_photo.getHeight();
+
+                    // Get the dimensions of the loaded image
+                    int imgWidth = image.getWidth();
+                    int imgHeight = image.getHeight();
+
+                    // Check if the image is larger than the label
+                    if (imgWidth > labelWidth || imgHeight > labelHeight) {
+                        // Calculate scaling factors to fit the image within the label
+                        double scaleX = (double) labelWidth / imgWidth;
+                        double scaleY = (double) labelHeight / imgHeight;
+
+                        // Use the smaller scale factor to ensure the entire image fits within the label
+                        double scale = Math.min(scaleX, scaleY);
+
+                        // Scale the image
+                        int scaledWidth = (int) (imgWidth * scale);
+                        int scaledHeight = (int) (imgHeight * scale);
+                        Image scaledImage = image.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
+
+                        // Create an ImageIcon from the scaled image
+                        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+                        // Set the scaled ImageIcon to the label
+                        lbl_photo.setIcon(scaledIcon);
+                    } else {
+                        // If the image is smaller than the label, set it directly without scaling
+                        lbl_photo.setIcon(new ImageIcon(image));
+                    }
+                } else {
+                    lbl_photo.setIcon(null);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            lbl_photo.setIcon(null);
+        }
+    }
+
+
+        private void resetRoomDetails() {
+            MaxGuest.setText("");
+            Inclusions.setText("");
+            Price.setText("");
+            lbl_photo.setIcon(null);
+        }
 
     private void PickRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickRoomBtnActionPerformed
         try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
