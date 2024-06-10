@@ -17,7 +17,6 @@ import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class AvailableRoomPage extends javax.swing.JFrame {
     private boolean roomPicked = false;
@@ -29,6 +28,9 @@ public class AvailableRoomPage extends javax.swing.JFrame {
     
     public AvailableRoomPage() {
         initComponents();
+        MaxGuest.setEditable(false);
+        Inclusions.setEditable(false);
+        Price.setEditable(false);
     }
 
     public Connection connect() {
@@ -125,6 +127,11 @@ public class AvailableRoomPage extends javax.swing.JFrame {
 
         Inclusions.setBackground(new java.awt.Color(246, 246, 246));
         Inclusions.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+        Inclusions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InclusionsActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 1, 70)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(55, 81, 107));
@@ -268,7 +275,7 @@ public class AvailableRoomPage extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PickRoomBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                     .addComponent(PaymentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -289,8 +296,8 @@ public class AvailableRoomPage extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dashboard1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dashboard1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -443,6 +450,10 @@ public class AvailableRoomPage extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Please enter valid numbers for both fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_PaymentBtnActionPerformed
+
+    private void InclusionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InclusionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InclusionsActionPerformed
 
     /**
      * @param args the command line arguments
