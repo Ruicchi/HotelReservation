@@ -19,23 +19,23 @@ public class BillingPage extends javax.swing.JFrame {
      */
     public BillingPage(double totalCost) {
         initComponents();
-        totalBill.setEditable(false);
-        totalBill.setText("Php " + totalCost);
-         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jTotalBill.setEditable(false);
+        jTotalBill.setText(String.valueOf(totalCost)); // Set total cost without currency symbol or formatting
+         jPayment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String selectedPaymentMethod = (String) jComboBox2.getSelectedItem();
+                String selectedPaymentMethod = (String) jPayment.getSelectedItem();
                 if (selectedPaymentMethod.equals("Cash")) {
-                    jTextField11.setText("N/A");
-                    jTextField11.setEditable(false);
+                    jRef.setText("N/A");
+                    jRef.setEditable(false);
                 } else {
-                    jTextField11.setText("");
-                    jTextField11.setEditable(true);
+                    jRef.setText("");
+                    jRef.setEditable(true);
                 }
-                jComboBox2ActionPerformed(evt);
+                jPaymentActionPerformed(evt);
             }
         });
-         
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,14 +57,14 @@ public class BillingPage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jPayment = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        jRef = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        totalBill = new javax.swing.JTextField();
+        jPaid = new javax.swing.JTextField();
+        jAdd = new javax.swing.JButton();
+        jClear = new javax.swing.JButton();
+        jTotalBill = new javax.swing.JTextField();
         jPanel6 = new RoundedPanel(25, Color.WHITE);
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -106,66 +106,67 @@ public class BillingPage extends javax.swing.JFrame {
         jLabel3.setText("Billing Information");
 
         jLabel14.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
-        jLabel14.setText("Total Bill");
+        jLabel14.setText("Total Bill (₱)");
 
         jLabel5.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
         jLabel5.setText("Payment Method");
 
-        jComboBox2.setFont(new java.awt.Font("Kannada MN", 0, 15)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Select A Payment Method - ", "Cash", "Gcash" }));
-        jComboBox2.setBorder(null);
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jPayment.setFont(new java.awt.Font("Kannada MN", 0, 15)); // NOI18N
+        jPayment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Select A Payment Method -", "Cash", "Gcash" }));
+        jPayment.setToolTipText("");
+        jPayment.setBorder(null);
+        jPayment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jPaymentActionPerformed(evt);
             }
         });
 
         jLabel13.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
         jLabel13.setText("Reference No. (If Gcash Payment)");
 
-        jTextField11.setBackground(new java.awt.Color(246, 246, 246));
-        jTextField11.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        jRef.setBackground(new java.awt.Color(246, 246, 246));
+        jRef.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+        jRef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                jRefActionPerformed(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
         jLabel7.setText("Amount Paid");
 
-        jTextField4.setBackground(new java.awt.Color(246, 246, 246));
-        jTextField4.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jPaid.setBackground(new java.awt.Color(246, 246, 246));
+        jPaid.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+        jPaid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jPaidActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(246, 246, 246));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(55, 81, 107));
-        jButton1.setText("ADD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jAdd.setBackground(new java.awt.Color(246, 246, 246));
+        jAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jAdd.setForeground(new java.awt.Color(55, 81, 107));
+        jAdd.setText("ADD");
+        jAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jAddActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(246, 246, 246));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(55, 81, 107));
-        jButton4.setText("CLEAR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jClear.setBackground(new java.awt.Color(246, 246, 246));
+        jClear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jClear.setForeground(new java.awt.Color(55, 81, 107));
+        jClear.setText("CLEAR");
+        jClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jClearActionPerformed(evt);
             }
         });
 
-        totalBill.setBackground(new java.awt.Color(246, 246, 246));
-        totalBill.addActionListener(new java.awt.event.ActionListener() {
+        jTotalBill.setBackground(new java.awt.Color(246, 246, 246));
+        jTotalBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalBillActionPerformed(evt);
+                jTotalBillActionPerformed(evt);
             }
         });
 
@@ -176,19 +177,19 @@ public class BillingPage extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(100, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(totalBill)
+                    .addComponent(jTotalBill)
                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField11)
+                    .addComponent(jPayment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jRef)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField4))
+                        .addComponent(jClear, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPaid))
                 .addGap(100, 100, 100))
         );
         jPanel5Layout.setVerticalGroup(
@@ -199,23 +200,23 @@ public class BillingPage extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(totalBill, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTotalBill, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jRef, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jClear, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -329,45 +330,65 @@ public class BillingPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPaymentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_jPaymentActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void jRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRefActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_jRefActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void jPaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPaidActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jPaidActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-// TODO add your handling code here:
-Date obj = new Date();
-String date = obj.toString();
+    private void jAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddActionPerformed
+        Date obj = new Date();
+        String date = obj.toString();
 
-jTextArea1.setText(jTextArea1.getText() + "\n" + date + "\n \n");
-jTextArea1.setText(jTextArea1.getText() + "Total Bill:" + "\t" + BillingPage.totalBill.getText() + "\n");
-jTextArea1.setText(jTextArea1.getText() + "Payment Method:" + "\t" + jComboBox2.getSelectedItem() + "\n");
+        // Check if required fields are empty
+        if (jPayment.getSelectedItem() == null || jPayment.getSelectedItem().equals("- Select A Payment Method -") || jPaid.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all required fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if required fields are empty or payment method is not selected
+        }
 
-String paymentMethod = (String) jComboBox2.getSelectedItem();
-if (paymentMethod.equals("Cash")) {
-    jTextArea1.setText(jTextArea1.getText() + "GCASH Reference No.:" + "\t" + "N/A" + "\n");
-} else {
-    jTextArea1.setText(jTextArea1.getText() + "GCASH Reference No.:" + "\t" + jTextField11.getText() + "\n");
-}
+        try {
+            double totalBill = Double.parseDouble(BillingPage.jTotalBill.getText());
+            double totalAmountPaid = Double.parseDouble(jPaid.getText());
 
-jTextArea1.setText(jTextArea1.getText() + "Total Amount Paid:" + "\t" + jTextField4.getText() + "\n");
+            // Check if total amount paid is greater than or equal to total bill
+            if (totalAmountPaid < totalBill) {
+                JOptionPane.showMessageDialog(this, "Total amount paid must be greater than or equal to the total bill.", "Error", JOptionPane.ERROR_MESSAGE);
+                return; // Exit the method if total amount paid is less than total bill
+            }
+            
+            String paymentMethod = (String) jPayment.getSelectedItem();
+            if (paymentMethod.equals("Cash")) {
+                jTextArea1.setText(jTextArea1.getText() + "GCASH Reference No.:" + "\t" + "N/A" + "\n");
+            } else {
+                // If payment method is GCash, check if jRef contains only integers
+                String refNumber = jRef.getText().trim();
+                try {
+                    Integer.parseInt(refNumber); // Attempt to parse the reference number as an integer
+                    jTextArea1.setText(jTextArea1.getText() + "GCASH Reference No.:" + "\t" + refNumber + "\n");
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Invalid reference number.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return; // Exit the method if reference number contains non-integer characters
+                }
+            }
+            
+            jTextArea1.setText(jTextArea1.getText() + "\n" + date + "\n \n");
+            jTextArea1.setText(jTextArea1.getText() + "Total Bill:" + "\t" + BillingPage.jTotalBill.getText() + "\n");
+            jTextArea1.setText(jTextArea1.getText() + "Payment Method:" + "\t" + jPayment.getSelectedItem() + "\n");
+            jTextArea1.setText(jTextArea1.getText() + "Total Amount Paid:" + "\t" + jPaid.getText() + "\n");
 
-try {
-    double totalBill = Double.parseDouble(BillingPage.totalBill.getText());
-    double totalAmountPaid = Double.parseDouble(jTextField4.getText());
-    double totalChange = totalAmountPaid - totalBill;
-    jTextArea1.setText(jTextArea1.getText() + "Total Change: " + totalChange + "\n");
-} catch (NumberFormatException e) {
-    System.out.println("Error parsing totalBill or totalAmountPaid: " + e.getMessage());
-}
-    }//GEN-LAST:event_jButton1ActionPerformed
+            double totalChange = totalAmountPaid - totalBill;
+            // Only add the text if total amount paid is not greater than the total bill
+            jTextArea1.setText(jTextArea1.getText() + "Total Change:" + "\t" + totalChange + "\n\n\n");
+        } catch (NumberFormatException e) {
+            System.out.println("Error parsing totalBill or totalAmountPaid: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jAddActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -378,17 +399,17 @@ try {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jClearActionPerformed
         // TODO add your handling code here:
-        totalBill.setText("");
-        jComboBox2.setSelectedItem(0);
-        jTextField11.setText("");
-        jTextField4.setText("");
-    }//GEN-LAST:event_jButton4ActionPerformed
+        jTotalBill.setText("");
+        jPayment.setSelectedItem(0);
+        jRef.setText("");
+        jPaid.setText("");
+    }//GEN-LAST:event_jClearActionPerformed
 
-    private void totalBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalBillActionPerformed
+    private void jTotalBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTotalBillActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_totalBillActionPerformed
+    }//GEN-LAST:event_jTotalBillActionPerformed
 
     private void button1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseClicked
         HomePage hp = new HomePage();
@@ -439,10 +460,9 @@ try {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private hotelreservation.Button button1;
     private hotelreservation.Dashboard dashboard1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jAdd;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton jClear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -450,16 +470,17 @@ try {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField jPaid;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JComboBox<String> jPayment;
+    private javax.swing.JTextField jRef;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField4;
-    public static javax.swing.JTextField totalBill;
+    public static javax.swing.JTextField jTotalBill;
     // End of variables declaration//GEN-END:variables
 
 class RoundedPanel extends JPanel {

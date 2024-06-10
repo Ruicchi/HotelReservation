@@ -152,20 +152,20 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="100" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="totalBill" max="32767" attributes="0"/>
+                              <Component id="jTotalBill" max="32767" attributes="0"/>
                               <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox2" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jTextField11" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jPayment" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jRef" alignment="1" max="32767" attributes="0"/>
                               <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="jButton1" min="-2" pref="124" max="-2" attributes="0"/>
+                                  <Component id="jAdd" min="-2" pref="124" max="-2" attributes="0"/>
                                   <EmptySpace pref="87" max="32767" attributes="0"/>
-                                  <Component id="jButton4" min="-2" pref="124" max="-2" attributes="0"/>
+                                  <Component id="jClear" min="-2" pref="124" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jTextField4" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jPaid" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
@@ -179,23 +179,23 @@
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="totalBill" min="-2" pref="57" max="-2" attributes="0"/>
+                          <Component id="jTotalBill" min="-2" pref="57" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="jPayment" min="-2" pref="51" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jTextField11" min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="jRef" min="-2" pref="51" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jTextField4" min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="jPaid" min="-2" pref="51" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton1" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
-                              <Component id="jButton4" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="jAdd" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="jClear" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -222,7 +222,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Kannada MN" size="18" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Total Bill"/>
+                    <Property name="text" type="java.lang.String" value="Total Bill (&#x20b1;)"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
@@ -233,24 +233,25 @@
                     <Property name="text" type="java.lang.String" value="Payment Method"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox2">
+                <Component class="javax.swing.JComboBox" name="jPayment">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Kannada MN" size="15" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="3">
-                        <StringItem index="0" value="- Select A Payment Method - "/>
+                        <StringItem index="0" value="- Select A Payment Method -"/>
                         <StringItem index="1" value="Cash"/>
                         <StringItem index="2" value="Gcash"/>
                       </StringArray>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="null"/>
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPaymentActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -264,7 +265,7 @@
                     <Property name="text" type="java.lang.String" value="Reference No. (If Gcash Payment)"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField11">
+                <Component class="javax.swing.JTextField" name="jRef">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f6" green="f6" red="f6" type="rgb"/>
@@ -279,7 +280,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField11ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRefActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel7">
@@ -290,7 +291,7 @@
                     <Property name="text" type="java.lang.String" value="Amount Paid"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField4">
+                <Component class="javax.swing.JTextField" name="jPaid">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f6" green="f6" red="f6" type="rgb"/>
@@ -305,10 +306,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPaidActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="jAdd">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f6" green="f6" red="f6" type="rgb"/>
@@ -322,10 +323,10 @@
                     <Property name="text" type="java.lang.String" value="ADD"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jAddActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton4">
+                <Component class="javax.swing.JButton" name="jClear">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f6" green="f6" red="f6" type="rgb"/>
@@ -339,17 +340,17 @@
                     <Property name="text" type="java.lang.String" value="CLEAR"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jClearActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="totalBill">
+                <Component class="javax.swing.JTextField" name="jTotalBill">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f6" green="f6" red="f6" type="rgb"/>
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="totalBillActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTotalBillActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
