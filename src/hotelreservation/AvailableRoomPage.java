@@ -369,7 +369,7 @@ public class AvailableRoomPage extends javax.swing.JFrame {
 
     private void PickRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickRoomBtnActionPerformed
          try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
-         PreparedStatement stmt = con.prepareStatement("UPDATE addedroomdb SET NotAvailable = ? WHERE RoomClassification = ? AND RoomNumber = ?")) {
+         PreparedStatement stmt = con.prepareStatement("UPDATE addedroomdb SET Available = ? WHERE RoomClassification = ? AND RoomNumber = ?")) {
         
         // Load MySQL JDBC Driver
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -385,7 +385,7 @@ public class AvailableRoomPage extends javax.swing.JFrame {
         }
 
         // Prepare and execute the SQL query
-        stmt.setBoolean(1, true); // Set NotAvailable to true
+        stmt.setBoolean(1, true); // Set Available to true
         stmt.setString(2, selectedRoomClassification);
         stmt.setString(3, selectedRoomNumber);
         int rowsAffected = stmt.executeUpdate();
