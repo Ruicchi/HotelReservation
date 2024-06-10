@@ -342,28 +342,31 @@ public class BillingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Date obj = new Date();
+// TODO add your handling code here:
+Date obj = new Date();
 String date = obj.toString();
 
-jTextArea1.setText(jTextArea1.getText()+"\n"+date+"\n \n");
-jTextArea1.setText(jTextArea1.getText()+"Total Bill:"+"\t"+totalBill.getText()+"\n");
-jTextArea1.setText(jTextArea1.getText()+"Payment Method:"+"\t"+jComboBox2.getSelectedItem()+"\n");
+jTextArea1.setText(jTextArea1.getText() + "\n" + date + "\n \n");
+jTextArea1.setText(jTextArea1.getText() + "Total Bill:" + "\t" + BillingPage.totalBill.getText() + "\n");
+jTextArea1.setText(jTextArea1.getText() + "Payment Method:" + "\t" + jComboBox2.getSelectedItem() + "\n");
 
 String paymentMethod = (String) jComboBox2.getSelectedItem();
 if (paymentMethod.equals("Cash")) {
-    jTextArea1.setText(jTextArea1.getText()+"GCASH Reference No.:"+"\t"+"N/A"+"\n");
+    jTextArea1.setText(jTextArea1.getText() + "GCASH Reference No.:" + "\t" + "N/A" + "\n");
 } else {
-    jTextArea1.setText(jTextArea1.getText()+"GCASH Reference No.:"+"\t"+jTextField11.getText()+"\n");
+    jTextArea1.setText(jTextArea1.getText() + "GCASH Reference No.:" + "\t" + jTextField11.getText() + "\n");
 }
 
-jTextArea1.setText(jTextArea1.getText()+"Total Amount Paid:"+"\t"+jTextField4.getText()+"\n");
+jTextArea1.setText(jTextArea1.getText() + "Total Amount Paid:" + "\t" + jTextField4.getText() + "\n");
 
-double totalBill = Double.parseDouble(BillingPage.totalBill.getText());
-double totalAmountPaid = Double.parseDouble(jTextField4.getText());
-double totalChange = totalAmountPaid - totalBill;
-
-jTextArea1.setText(jTextArea1.getText() + "Total Change: " + totalChange + "\n");
+try {
+    double totalBill = Double.parseDouble(BillingPage.totalBill.getText());
+    double totalAmountPaid = Double.parseDouble(jTextField4.getText());
+    double totalChange = totalAmountPaid - totalBill;
+    jTextArea1.setText(jTextArea1.getText() + "Total Change: " + totalChange + "\n");
+} catch (NumberFormatException e) {
+    System.out.println("Error parsing totalBill or totalAmountPaid: " + e.getMessage());
+}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
