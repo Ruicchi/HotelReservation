@@ -26,7 +26,7 @@ public class UsersPage extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("MySQL JDBC Driver Registered!");
             // Connect to Database
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "password");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
             System.out.println("Database Connected Successfully!!!");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UsersPage.class.getName()).log(Level.SEVERE, null, ex);
