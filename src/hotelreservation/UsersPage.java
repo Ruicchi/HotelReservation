@@ -84,6 +84,7 @@ public class UsersPage extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 1, 60)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(55, 81, 107));
         jLabel1.setText("Users");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -93,7 +94,7 @@ public class UsersPage extends javax.swing.JFrame {
         EmployeeId.setBackground(new java.awt.Color(246, 246, 246));
         EmployeeId.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
 
-        RegisterPage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 51), 3));
+        RegisterPage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         RegisterPage.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -123,7 +124,7 @@ public class UsersPage extends javax.swing.JFrame {
 
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("Delete User");
-        button1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        button1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         button1.setRadius(25);
         button1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -210,8 +211,6 @@ public class UsersPage extends javax.swing.JFrame {
                 .addContainerGap(99, Short.MAX_VALUE))
         );
 
-        dashboard1.setBackground(new java.awt.Color(242, 242, 242));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -245,9 +244,7 @@ public class UsersPage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

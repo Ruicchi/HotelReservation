@@ -117,9 +117,9 @@ public class GuestPage extends javax.swing.JFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Malayalam MN", 1, 60)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(55, 81, 107));
         jLabel2.setText("Guests");
 
-        jGuest.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102), 3));
         jGuest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jGuest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

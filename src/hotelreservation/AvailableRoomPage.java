@@ -55,7 +55,6 @@ public class AvailableRoomPage extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel5 = new RoundedPanel(25, Color.WHITE);
         RoomClassification = new javax.swing.JComboBox<>();
-        PickRoomBtn = new javax.swing.JButton();
         lbl_photo = new javax.swing.JLabel();
         RoomNumber = new javax.swing.JComboBox<>();
         MaxGuest = new javax.swing.JTextField();
@@ -68,9 +67,10 @@ public class AvailableRoomPage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        PaymentBtn = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jDayStay = new javax.swing.JTextField();
+        PickRoomBtn = new hotelreservation.Button();
+        PaymentBtn = new hotelreservation.Button();
         dashboard1 = new hotelreservation.Dashboard();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -98,51 +98,41 @@ public class AvailableRoomPage extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        RoomClassification.setBackground(new java.awt.Color(246, 246, 246));
         RoomClassification.setFont(new java.awt.Font("Kannada MN", 0, 15)); // NOI18N
         RoomClassification.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Twin", "Family", "Deluxe" }));
-        RoomClassification.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+        RoomClassification.setBorder(null);
         RoomClassification.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RoomClassificationActionPerformed(evt);
             }
         });
 
-        PickRoomBtn.setBackground(new java.awt.Color(55, 81, 107));
-        PickRoomBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        PickRoomBtn.setForeground(new java.awt.Color(255, 255, 255));
-        PickRoomBtn.setText("Pick Room");
-        PickRoomBtn.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(48, 71, 94)));
-        PickRoomBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PickRoomBtnMouseClicked(evt);
-            }
-        });
-        PickRoomBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PickRoomBtnActionPerformed(evt);
-            }
-        });
-
         lbl_photo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(55, 81, 107), 3, true));
 
+        RoomNumber.setBackground(new java.awt.Color(246, 246, 246));
         RoomNumber.setFont(new java.awt.Font("Kannada MN", 0, 15)); // NOI18N
-        RoomNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+        RoomNumber.setBorder(null);
         RoomNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RoomNumberActionPerformed(evt);
             }
         });
 
+        MaxGuest.setBackground(new java.awt.Color(246, 246, 246));
         MaxGuest.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
 
+        Inclusions.setBackground(new java.awt.Color(246, 246, 246));
         Inclusions.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 1, 70)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(55, 81, 107));
         jLabel1.setText("Available Rooms");
 
-        jLabel14.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Kannada MN", 1, 18)); // NOI18N
         jLabel14.setText("Image");
 
+        Price.setBackground(new java.awt.Color(246, 246, 246));
         Price.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
 
         jLabel6.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
@@ -160,26 +150,31 @@ public class AvailableRoomPage extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
         jLabel5.setText("Room Number");
 
-        PaymentBtn.setBackground(new java.awt.Color(55, 81, 107));
-        PaymentBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
+        jLabel15.setText("Days of Stay");
+
+        jDayStay.setBackground(new java.awt.Color(246, 246, 246));
+        jDayStay.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+
+        PickRoomBtn.setForeground(new java.awt.Color(255, 255, 255));
+        PickRoomBtn.setText("Pick Room");
+        PickRoomBtn.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        PickRoomBtn.setRadius(25);
+        PickRoomBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PickRoomBtnActionPerformed(evt);
+            }
+        });
+
         PaymentBtn.setForeground(new java.awt.Color(255, 255, 255));
         PaymentBtn.setText("Proceed to Payment");
-        PaymentBtn.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(48, 71, 94)));
+        PaymentBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        PaymentBtn.setRadius(25);
         PaymentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PaymentBtnMouseClicked(evt);
             }
         });
-        PaymentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PaymentBtnActionPerformed(evt);
-            }
-        });
-
-        jLabel15.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
-        jLabel15.setText("Days of Stay");
-
-        jDayStay.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -216,12 +211,12 @@ public class AvailableRoomPage extends javax.swing.JFrame {
                                     .addComponent(jDayStay, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(40, 40, 40))
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(145, 145, 145)
+                                .addGap(144, 144, 144)
                                 .addComponent(PickRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel14)
-                            .addComponent(lbl_photo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_photo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PaymentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -264,9 +259,9 @@ public class AvailableRoomPage extends javax.swing.JFrame {
                                 .addComponent(jDayStay, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(lbl_photo, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PaymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PickRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PickRoomBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                    .addComponent(PaymentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -372,10 +367,6 @@ public class AvailableRoomPage extends javax.swing.JFrame {
         }
     }
 
-    private void PickRoomBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PickRoomBtnMouseClicked
-        
-    }//GEN-LAST:event_PickRoomBtnMouseClicked
-
     private void PickRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickRoomBtnActionPerformed
          try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
          PreparedStatement stmt = con.prepareStatement("UPDATE addedroomdb SET NotAvailable = ? WHERE RoomClassification = ? AND RoomNumber = ?")) {
@@ -427,10 +418,6 @@ public class AvailableRoomPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please enter valid numbers for both fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_PaymentBtnMouseClicked
-
-    private void PaymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PaymentBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -485,8 +472,8 @@ public class AvailableRoomPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Inclusions;
     private javax.swing.JTextField MaxGuest;
-    private javax.swing.JButton PaymentBtn;
-    private javax.swing.JButton PickRoomBtn;
+    private hotelreservation.Button PaymentBtn;
+    private hotelreservation.Button PickRoomBtn;
     private javax.swing.JTextField Price;
     private javax.swing.JComboBox<String> RoomClassification;
     private javax.swing.JComboBox<String> RoomNumber;

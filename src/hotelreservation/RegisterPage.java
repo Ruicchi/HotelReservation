@@ -25,12 +25,12 @@ public class RegisterPage extends javax.swing.JFrame {
         bg = new javax.swing.JPanel();
         EmployeeId = new javax.swing.JTextField();
         Name = new javax.swing.JTextField();
-        RegisterBtn = new javax.swing.JButton();
         Subtext = new javax.swing.JLabel();
         CreateAcc = new javax.swing.JLabel();
         image = new javax.swing.JLabel();
         Password = new javax.swing.JPasswordField();
         ConfirmPassword = new javax.swing.JPasswordField();
+        RegisterBtn = new hotelreservation.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,29 +72,13 @@ public class RegisterPage extends javax.swing.JFrame {
             }
         });
 
-        RegisterBtn.setBackground(new java.awt.Color(0, 102, 102));
-        RegisterBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        RegisterBtn.setForeground(new java.awt.Color(255, 255, 255));
-        RegisterBtn.setText("Sign me up!");
-        RegisterBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.white, java.awt.Color.black, java.awt.Color.darkGray));
-        RegisterBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RegisterBtnMouseClicked(evt);
-            }
-        });
-        RegisterBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegisterBtnActionPerformed(evt);
-            }
-        });
-
         Subtext.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Subtext.setForeground(new java.awt.Color(102, 102, 102));
         Subtext.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Subtext.setText("Start your journey with Hotel Callé!");
 
         CreateAcc.setFont(new java.awt.Font("Malayalam MN", 1, 60)); // NOI18N
-        CreateAcc.setForeground(new java.awt.Color(0, 102, 102));
+        CreateAcc.setForeground(new java.awt.Color(55, 81, 107));
         CreateAcc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CreateAcc.setText("Create Account");
 
@@ -140,6 +124,16 @@ public class RegisterPage extends javax.swing.JFrame {
             }
         });
 
+        RegisterBtn.setForeground(new java.awt.Color(255, 255, 255));
+        RegisterBtn.setText("Sign me up!");
+        RegisterBtn.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        RegisterBtn.setRadius(20);
+        RegisterBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RegisterBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -155,11 +149,11 @@ public class RegisterPage extends javax.swing.JFrame {
                             .addComponent(Password)
                             .addComponent(ConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(RegisterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(CreateAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(CreateAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(RegisterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -178,7 +172,7 @@ public class RegisterPage extends javax.swing.JFrame {
                 .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(ConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(40, 40, 40)
                 .addComponent(RegisterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(104, 104, 104))
             .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -197,64 +191,8 @@ public class RegisterPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-// </editor-fold>                        
-    private void RegisterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RegisterBtnActionPerformed
 
-    private void RegisterBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegisterBtnMouseClicked
-          Connection con = null;
-    try {
-        // Load MySQL JDBC Driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        System.out.println("MySQL JDBC Driver Registered!");
-
-        // Connect to Database
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
-        System.out.println("Database Connected Successfully!!!");
-
-        // Accept inputs
-        String name = Name.getText();
-        String employeeId = EmployeeId.getText();
-        String password = Password.getText();
-        String confirmPassword = ConfirmPassword.getText();
-
-        // Check if passwords match
-        if (!password.equals(confirmPassword)) {
-            JOptionPane.showMessageDialog(this, "Passwords don't match");
-        } else if (!isValidPassword(password)) {
-            JOptionPane.showMessageDialog(this, "Password must be at least 5 letters long, contain no special characters, and include at least one number");
-        } else {
-            // Insert user data into the database
-            String insertSql = "INSERT INTO registerdb (Name, EmployeeID, Password) VALUES (?, ?, ?)";
-            PreparedStatement pstmt = con.prepareStatement(insertSql);
-            pstmt.setString(1, name);
-            pstmt.setString(2, employeeId);
-            pstmt.setString(3, password);
-            pstmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(this, "Registration Successful!");
-
-            // Go Back to Sign in Page when clicked
-            SignInPage sp = new SignInPage();
-            sp.show();
-            dispose();
-        }
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(RegisterPage.class.getName()).log(Level.SEVERE, null, ex);
-        JOptionPane.showMessageDialog(this, "MySQL JDBC Driver not found. Please add the driver to your project.");
-    } catch (SQLException ex) {
-        Logger.getLogger(RegisterPage.class.getName()).log(Level.SEVERE, null, ex);
-        JOptionPane.showMessageDialog(this, "Database connection failed: " + ex.getMessage());
-    } finally {
-        try {
-            if (con != null) con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    }//GEN-LAST:event_RegisterBtnMouseClicked
-    private boolean isValidPassword(String password) {
+   private boolean isValidPassword(String password) {
     if (password.length() < 5) {
         return false;
     }
@@ -352,6 +290,59 @@ public class RegisterPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ConfirmPasswordActionPerformed
 
+    private void RegisterBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegisterBtnMouseClicked
+          Connection con = null;
+    try {
+        // Load MySQL JDBC Driver
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        System.out.println("MySQL JDBC Driver Registered!");
+
+        // Connect to Database
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
+        System.out.println("Database Connected Successfully!!!");
+
+        // Accept inputs
+        String name = Name.getText();
+        String employeeId = EmployeeId.getText();
+        String password = Password.getText();
+        String confirmPassword = ConfirmPassword.getText();
+
+        // Check if passwords match
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(this, "Passwords don't match");
+        } else if (!isValidPassword(password)) {
+            JOptionPane.showMessageDialog(this, "Password must be at least 5 letters long, contain no special characters, and include at least one number");
+        } else {
+            // Insert user data into the database
+            String insertSql = "INSERT INTO registerdb (Name, EmployeeID, Password) VALUES (?, ?, ?)";
+            PreparedStatement pstmt = con.prepareStatement(insertSql);
+            pstmt.setString(1, name);
+            pstmt.setString(2, employeeId);
+            pstmt.setString(3, password);
+            pstmt.executeUpdate();
+            
+            JOptionPane.showMessageDialog(this, "Registration Successful!");
+
+            // Go Back to Sign in Page when clicked
+            SignInPage sp = new SignInPage();
+            sp.show();
+            dispose();
+        }
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(RegisterPage.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(this, "MySQL JDBC Driver not found. Please add the driver to your project.");
+    } catch (SQLException ex) {
+        Logger.getLogger(RegisterPage.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(this, "Database connection failed: " + ex.getMessage());
+    } finally {
+        try {
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    }//GEN-LAST:event_RegisterBtnMouseClicked
+
     
     /**
      * @param args the command line arguments
@@ -392,7 +383,7 @@ public class RegisterPage extends javax.swing.JFrame {
     private javax.swing.JTextField EmployeeId;
     private javax.swing.JTextField Name;
     private javax.swing.JPasswordField Password;
-    private javax.swing.JButton RegisterBtn;
+    private hotelreservation.Button RegisterBtn;
     private javax.swing.JLabel Subtext;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel image;

@@ -40,9 +40,9 @@ public class AdminPage2 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new RoundedPanel(25, Color.WHITE);
         jLabel1 = new javax.swing.JLabel();
-        UsersBtn = new javax.swing.JButton();
-        GuestPageBtn = new javax.swing.JButton();
-        AddRoomBtn = new javax.swing.JButton();
+        GuestPageBtn = new hotelreservation.Button();
+        UsersBtn = new hotelreservation.Button();
+        AddRoomBtn = new hotelreservation.Button();
         dashboard1 = new hotelreservation.Dashboard();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,35 +69,33 @@ public class AdminPage2 extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 1, 80)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(55, 81, 107));
         jLabel1.setText("Admin Page");
 
-        UsersBtn.setBackground(new java.awt.Color(55, 81, 107));
-        UsersBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        UsersBtn.setForeground(new java.awt.Color(255, 255, 255));
-        UsersBtn.setText("Users");
-        UsersBtn.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(48, 71, 94)));
-        UsersBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsersBtnActionPerformed(evt);
-            }
-        });
-
-        GuestPageBtn.setBackground(new java.awt.Color(55, 81, 107));
-        GuestPageBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         GuestPageBtn.setForeground(new java.awt.Color(255, 255, 255));
-        GuestPageBtn.setText("Guests");
-        GuestPageBtn.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(48, 71, 94)));
+        GuestPageBtn.setText("Guest");
+        GuestPageBtn.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        GuestPageBtn.setRadius(25);
         GuestPageBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuestPageBtnActionPerformed(evt);
             }
         });
 
-        AddRoomBtn.setBackground(new java.awt.Color(55, 81, 107));
-        AddRoomBtn.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        UsersBtn.setForeground(new java.awt.Color(255, 255, 255));
+        UsersBtn.setText("User");
+        UsersBtn.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        UsersBtn.setRadius(25);
+        UsersBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsersBtnActionPerformed(evt);
+            }
+        });
+
         AddRoomBtn.setForeground(new java.awt.Color(255, 255, 255));
         AddRoomBtn.setText("Add Room");
-        AddRoomBtn.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(48, 71, 94)));
+        AddRoomBtn.setFont(new java.awt.Font("Segoe UI", 1, 34)); // NOI18N
+        AddRoomBtn.setRadius(25);
         AddRoomBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddRoomBtnActionPerformed(evt);
@@ -109,28 +107,29 @@ public class AdminPage2 extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addComponent(jLabel1)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(243, 243, 243)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(GuestPageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(UsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(AddRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(GuestPageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addComponent(UsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addComponent(AddRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(70, 70, 70)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(GuestPageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(GuestPageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UsersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -171,19 +170,19 @@ public class AdminPage2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersBtnActionPerformed
-        // Go to users page
-        UsersPage up = new UsersPage();
-        up.show();
-        dispose();
-    }//GEN-LAST:event_UsersBtnActionPerformed
-
     private void GuestPageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuestPageBtnActionPerformed
         // Go to guest page
         GuestPage gp = new GuestPage();
         gp.show();
         dispose();
     }//GEN-LAST:event_GuestPageBtnActionPerformed
+
+    private void UsersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersBtnActionPerformed
+        // Go to users page
+        UsersPage up = new UsersPage();
+        up.show();
+        dispose();
+    }//GEN-LAST:event_UsersBtnActionPerformed
 
     private void AddRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddRoomBtnActionPerformed
         //Add room
@@ -229,9 +228,9 @@ public class AdminPage2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddRoomBtn;
-    private javax.swing.JButton GuestPageBtn;
-    private javax.swing.JButton UsersBtn;
+    private hotelreservation.Button AddRoomBtn;
+    private hotelreservation.Button GuestPageBtn;
+    private hotelreservation.Button UsersBtn;
     private hotelreservation.Dashboard dashboard1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

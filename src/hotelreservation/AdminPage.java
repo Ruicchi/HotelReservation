@@ -44,8 +44,8 @@ public class AdminPage extends javax.swing.JFrame {
         Password = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        SignInBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        SignInBtn = new hotelreservation.Button();
         dashboard1 = new hotelreservation.Dashboard();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,36 +71,47 @@ public class AdminPage extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        EmployeeId.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 5, true));
+        EmployeeId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        EmployeeId.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        EmployeeId.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
 
         jLabel2.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
         jLabel2.setText("Password");
 
-        Password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 5, true));
+        Password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Password.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        Password.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
         Password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PasswordActionPerformed(evt);
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(55, 81, 107));
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 1, 80)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(55, 81, 107));
         jLabel1.setText("Admin Page");
 
         jLabel3.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
         jLabel3.setText("Verify Identity...");
 
-        SignInBtn.setBackground(new java.awt.Color(153, 153, 153));
-        SignInBtn.setFont(new java.awt.Font("Kannada MN", 3, 18)); // NOI18N
-        SignInBtn.setText("Sign in");
-        SignInBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 7, true));
+        jLabel4.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
+        jLabel4.setText("Employee ID");
+
+        SignInBtn.setForeground(new java.awt.Color(255, 255, 255));
+        SignInBtn.setText("Sign In");
+        SignInBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        SignInBtn.setRadius(25);
         SignInBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SignInBtnMouseClicked(evt);
             }
         });
-
-        jLabel4.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
-        jLabel4.setText("Employee ID");
+        SignInBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SignInBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -109,22 +120,21 @@ public class AdminPage extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(267, 267, 267)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2)
-                                .addComponent(EmployeeId)
-                                .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(394, 394, 394)
-                        .addComponent(SignInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(236, 236, 236)
                         .addComponent(jLabel1))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(398, 398, 398)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(264, 264, 264)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(EmployeeId)
+                            .addComponent(Password, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(354, 354, 354)
+                        .addComponent(SignInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -142,9 +152,9 @@ public class AdminPage extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(SignInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SignInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(175, 175, 175))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -166,7 +176,7 @@ public class AdminPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dashboard1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
+                    .addComponent(dashboard1, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -187,6 +197,10 @@ public class AdminPage extends javax.swing.JFrame {
     private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordActionPerformed
+
+    private void SignInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SignInBtnActionPerformed
 
     private void SignInBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignInBtnMouseClicked
         //Sign in
@@ -277,7 +291,7 @@ public class AdminPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField EmployeeId;
     private javax.swing.JPasswordField Password;
-    private javax.swing.JButton SignInBtn;
+    private hotelreservation.Button SignInBtn;
     private hotelreservation.Dashboard dashboard1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

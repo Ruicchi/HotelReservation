@@ -74,19 +74,19 @@ public class AddRoomPage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        AddRoomBtn = new javax.swing.JButton();
         RoomClassification = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        UploadBtn = new javax.swing.JButton();
         lbl_photo = new javax.swing.JLabel();
         RoomNumber = new javax.swing.JTextField();
         MaxGuest = new javax.swing.JTextField();
         Inclusions = new javax.swing.JTextField();
         Price = new javax.swing.JTextField();
+        AddRoomBtn = new hotelreservation.Button();
+        UploadBtn = new hotelreservation.Button();
         dashboard1 = new hotelreservation.Dashboard();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,6 +113,7 @@ public class AddRoomPage extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 1, 70)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(55, 81, 107));
         jLabel1.setText("Add a Room");
 
         jLabel4.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
@@ -124,24 +125,9 @@ public class AddRoomPage extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
         jLabel13.setText("Maximum No. of Guest/s");
 
-        AddRoomBtn.setBackground(new java.awt.Color(153, 153, 153));
-        AddRoomBtn.setFont(new java.awt.Font("Kannada MN", 1, 18)); // NOI18N
-        AddRoomBtn.setText("Add Room");
-        AddRoomBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 5, true));
-        AddRoomBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AddRoomBtnMouseClicked(evt);
-            }
-        });
-        AddRoomBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddRoomBtnActionPerformed(evt);
-            }
-        });
-
         RoomClassification.setFont(new java.awt.Font("Kannada MN", 0, 15)); // NOI18N
         RoomClassification.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Twin", "Family", "Deluxe" }));
-        RoomClassification.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+        RoomClassification.setBorder(null);
         RoomClassification.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RoomClassificationActionPerformed(evt);
@@ -154,9 +140,10 @@ public class AddRoomPage extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
         jLabel7.setText("Price");
 
-        jLabel14.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Kannada MN", 1, 18)); // NOI18N
         jLabel14.setText("Upload Image");
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
@@ -172,21 +159,6 @@ public class AddRoomPage extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        UploadBtn.setBackground(new java.awt.Color(153, 153, 153));
-        UploadBtn.setFont(new java.awt.Font("Kannada MN", 1, 14)); // NOI18N
-        UploadBtn.setText("Upload");
-        UploadBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 5, true));
-        UploadBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                UploadBtnMouseClicked(evt);
-            }
-        });
-        UploadBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UploadBtnActionPerformed(evt);
-            }
-        });
-
         lbl_photo.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
 
         RoomNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
@@ -197,44 +169,65 @@ public class AddRoomPage extends javax.swing.JFrame {
 
         Price.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
 
+        AddRoomBtn.setForeground(new java.awt.Color(255, 255, 255));
+        AddRoomBtn.setText("Add Room");
+        AddRoomBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        AddRoomBtn.setRadius(15);
+        AddRoomBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddRoomBtnActionPerformed(evt);
+            }
+        });
+
+        UploadBtn.setForeground(new java.awt.Color(255, 255, 255));
+        UploadBtn.setText("Upload");
+        UploadBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        UploadBtn.setRadius(15);
+        UploadBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UploadBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(RoomClassification, 0, 250, Short.MAX_VALUE)
-                            .addComponent(RoomNumber)
-                            .addComponent(MaxGuest))
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(AddRoomBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(Inclusions)
-                            .addComponent(Price))
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel14)
-                            .addComponent(lbl_photo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(UploadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(98, 98, 98)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(RoomClassification, 0, 250, Short.MAX_VALUE)
+                                    .addComponent(RoomNumber)
+                                    .addComponent(MaxGuest))
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(Inclusions, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                    .addComponent(Price)
+                                    .addComponent(AddRoomBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(41, 41, 41)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel14)
+                                    .addComponent(lbl_photo, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                    .addComponent(UploadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(278, 278, 278))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -258,16 +251,12 @@ public class AddRoomPage extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel13))
                     .addComponent(lbl_photo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(UploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MaxGuest, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AddRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(UploadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MaxGuest, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddRoomBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 22, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(166, 166, 166))
         );
@@ -309,37 +298,9 @@ public class AddRoomPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UploadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UploadBtnActionPerformed
-
     private void RoomClassificationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RoomClassificationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RoomClassificationActionPerformed
-
-    private void AddRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddRoomBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AddRoomBtnActionPerformed
-
-    private void UploadBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UploadBtnMouseClicked
-        JFileChooser chooser = new JFileChooser();
-        int returnVal = chooser.showOpenDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File f = chooser.getSelectedFile();
-            if (f != null) {
-                path2 = f.getAbsolutePath();
-                try {
-                    BufferedImage bi = ImageIO.read(new File(path2));
-                    Image img = bi.getScaledInstance(201, 176, Image.SCALE_SMOOTH);
-                    ImageIcon icon = new ImageIcon(img);
-                    lbl_photo.setIcon(icon);
-                } catch (IOException ex) {
-                    Logger.getLogger(AddRoomPage.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        
-    }//GEN-LAST:event_UploadBtnMouseClicked
 
     private void updateRoomDetails() {
     String selectedRoomType = (String) RoomClassification.getSelectedItem();
@@ -374,7 +335,12 @@ public class AddRoomPage extends javax.swing.JFrame {
     }
 }
   
-    private void AddRoomBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddRoomBtnMouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void AddRoomBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddRoomBtnActionPerformed
         String roomClassification = (String) RoomClassification.getSelectedItem();
         String roomNumber = RoomNumber.getText();
         String maxGuest = MaxGuest.getText();
@@ -439,12 +405,26 @@ public class AddRoomPage extends javax.swing.JFrame {
             }
 }
 
-    }//GEN-LAST:event_AddRoomBtnMouseClicked
+    }//GEN-LAST:event_AddRoomBtnActionPerformed
 
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseClicked
+    private void UploadBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UploadBtnMouseClicked
+        JFileChooser chooser = new JFileChooser();
+        int returnVal = chooser.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File f = chooser.getSelectedFile();
+            if (f != null) {
+                path2 = f.getAbsolutePath();
+                try {
+                    BufferedImage bi = ImageIO.read(new File(path2));
+                    Image img = bi.getScaledInstance(201, 176, Image.SCALE_SMOOTH);
+                    ImageIcon icon = new ImageIcon(img);
+                    lbl_photo.setIcon(icon);
+                } catch (IOException ex) {
+                    Logger.getLogger(AddRoomPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_UploadBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -513,13 +493,13 @@ public class AddRoomPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddRoomBtn;
+    private hotelreservation.Button AddRoomBtn;
     private javax.swing.JTextField Inclusions;
     private javax.swing.JTextField MaxGuest;
     private javax.swing.JTextField Price;
     private javax.swing.JComboBox<String> RoomClassification;
     private javax.swing.JTextField RoomNumber;
-    private javax.swing.JButton UploadBtn;
+    private hotelreservation.Button UploadBtn;
     private hotelreservation.Dashboard dashboard1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;

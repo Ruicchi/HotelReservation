@@ -32,17 +32,17 @@ public class SignInPage extends javax.swing.JFrame {
         EmployeeId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         Password = new javax.swing.JPasswordField();
-        SignInBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         RegisterBtn = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        SignInBtn = new hotelreservation.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 1, 80)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel1.setForeground(new java.awt.Color(55, 81, 107));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Sign in");
 
@@ -91,28 +91,12 @@ public class SignInPage extends javax.swing.JFrame {
             }
         });
 
-        SignInBtn.setBackground(new java.awt.Color(0, 102, 102));
-        SignInBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        SignInBtn.setForeground(new java.awt.Color(255, 255, 255));
-        SignInBtn.setText("Sign me in!");
-        SignInBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.white, java.awt.Color.darkGray, java.awt.Color.gray));
-        SignInBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SignInBtnMouseClicked(evt);
-            }
-        });
-        SignInBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SignInBtnActionPerformed(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Kannada MN", 0, 12)); // NOI18N
         jLabel5.setText("No account yet?");
 
         RegisterBtn.setBackground(new java.awt.Color(0, 102, 102));
         RegisterBtn.setFont(new java.awt.Font("Khmer MN", 3, 14)); // NOI18N
-        RegisterBtn.setForeground(new java.awt.Color(0, 102, 102));
+        RegisterBtn.setForeground(new java.awt.Color(57, 85, 119));
         RegisterBtn.setText("Register");
         RegisterBtn.setBorder(null);
         RegisterBtn.setBorderPainted(false);
@@ -131,6 +115,21 @@ public class SignInPage extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Kannada MN", 0, 12)); // NOI18N
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/HALF.png"))); // NOI18N
 
+        SignInBtn.setForeground(new java.awt.Color(255, 255, 255));
+        SignInBtn.setText("Sign me in!");
+        SignInBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        SignInBtn.setRadius(20);
+        SignInBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SignInBtnMouseClicked(evt);
+            }
+        });
+        SignInBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SignInBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
@@ -141,19 +140,19 @@ public class SignInPage extends javax.swing.JFrame {
                         .addGap(173, 173, 173)
                         .addComponent(jLabel1))
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RegisterBtn))
-                            .addComponent(SignInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(bgLayout.createSequentialGroup()
                         .addGap(122, 122, 122)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(EmployeeId)
                             .addComponent(Password, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(SignInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(bgLayout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(RegisterBtn)))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -168,8 +167,8 @@ public class SignInPage extends javax.swing.JFrame {
                 .addComponent(EmployeeId, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(SignInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(SignInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,19 +195,53 @@ public class SignInPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordActionPerformed
 
-    private void SignInBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignInBtnMouseClicked
-        // Open Home Page when clicked
-        HomePage hp = new HomePage();
-        hp.show();
-        dispose();                                                                         
-
-    }//GEN-LAST:event_SignInBtnMouseClicked
-
     private void RegisterBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegisterBtnMouseClicked
         RegisterPage rp = new RegisterPage();
         rp.show();
         dispose();
     }//GEN-LAST:event_RegisterBtnMouseClicked
+
+    private void EmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmployeeIdActionPerformed
+
+    private void RegisterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBtnActionPerformed
+        RegisterPage rp = new RegisterPage();
+        rp.show();
+        dispose();
+    }//GEN-LAST:event_RegisterBtnActionPerformed
+
+    private void EmployeeIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmployeeIdFocusGained
+            if(EmployeeId.getText().equals("Employee ID"))
+        {
+            EmployeeId.setText("");
+            EmployeeId.setForeground(new Color(102,102,102));
+            
+        }
+    }//GEN-LAST:event_EmployeeIdFocusGained
+
+    private void EmployeeIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmployeeIdFocusLost
+         if (EmployeeId.getText().isEmpty()) {
+            EmployeeId.setText("Employee ID");
+            EmployeeId.setForeground(new Color(102, 102, 102));
+         }
+    }//GEN-LAST:event_EmployeeIdFocusLost
+
+    private void PasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PasswordFocusGained
+        if (new String(Password.getPassword()).equals("Password")) {
+            Password.setText("");
+            Password.setEchoChar('●');
+            Password.setForeground(new Color(102, 102, 102));
+        }
+    }//GEN-LAST:event_PasswordFocusGained
+
+    private void PasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PasswordFocusLost
+        if (new String(Password.getPassword()).isEmpty()) {
+            Password.setText("Password");
+            Password.setEchoChar('\u0000');
+            Password.setForeground(new Color(102, 102, 102));
+        }
+    }//GEN-LAST:event_PasswordFocusLost
 
     private void SignInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInBtnActionPerformed
         //Sign in
@@ -260,47 +293,13 @@ public class SignInPage extends javax.swing.JFrame {
 }
     }//GEN-LAST:event_SignInBtnActionPerformed
 
-    private void EmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmployeeIdActionPerformed
+    private void SignInBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignInBtnMouseClicked
+        // Open Home Page when clicked
+        HomePage hp = new HomePage();
+        hp.show();
+        dispose();                                                                         
 
-    private void RegisterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBtnActionPerformed
-        RegisterPage rp = new RegisterPage();
-        rp.show();
-        dispose();
-    }//GEN-LAST:event_RegisterBtnActionPerformed
-
-    private void EmployeeIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmployeeIdFocusGained
-            if(EmployeeId.getText().equals("Employee ID"))
-        {
-            EmployeeId.setText("");
-            EmployeeId.setForeground(new Color(102,102,102));
-            
-        }
-    }//GEN-LAST:event_EmployeeIdFocusGained
-
-    private void EmployeeIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmployeeIdFocusLost
-         if (EmployeeId.getText().isEmpty()) {
-            EmployeeId.setText("Employee ID");
-            EmployeeId.setForeground(new Color(102, 102, 102));
-         }
-    }//GEN-LAST:event_EmployeeIdFocusLost
-
-    private void PasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PasswordFocusGained
-        if (new String(Password.getPassword()).equals("Password")) {
-            Password.setText("");
-            Password.setEchoChar('●');
-            Password.setForeground(new Color(102, 102, 102));
-        }
-    }//GEN-LAST:event_PasswordFocusGained
-
-    private void PasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PasswordFocusLost
-        if (new String(Password.getPassword()).isEmpty()) {
-            Password.setText("Password");
-            Password.setEchoChar('\u0000');
-            Password.setForeground(new Color(102, 102, 102));
-        }
-    }//GEN-LAST:event_PasswordFocusLost
+    }//GEN-LAST:event_SignInBtnMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -338,7 +337,7 @@ public class SignInPage extends javax.swing.JFrame {
     private javax.swing.JTextField EmployeeId;
     private javax.swing.JPasswordField Password;
     private javax.swing.JButton RegisterBtn;
-    private javax.swing.JButton SignInBtn;
+    private hotelreservation.Button SignInBtn;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

@@ -130,6 +130,7 @@ public class CancelResPage extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 1, 60)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(55, 81, 107));
         jLabel1.setText("Cancel Reservation");
 
         cancelRoomNum.setBackground(new java.awt.Color(246, 246, 246));
@@ -159,7 +160,7 @@ public class CancelResPage extends javax.swing.JFrame {
         cancelReason.setBackground(new java.awt.Color(246, 246, 246));
         cancelReason.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cancelReason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Payment concerns", "Change of plans", "Bad customer review", "Inaccessible location", "Lack of available services" }));
-        cancelReason.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+        cancelReason.setBorder(null);
 
         insertAndRefreshButtonActionPerformed.setForeground(new java.awt.Color(255, 255, 255));
         insertAndRefreshButtonActionPerformed.setText("Confirm");

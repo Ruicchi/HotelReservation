@@ -251,6 +251,7 @@ public class CheckInPage extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Malayalam MN", 1, 60)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(55, 81, 107));
         jLabel1.setText("Check In");
 
         jLabel3.setFont(new java.awt.Font("Kannada MN", 0, 18)); // NOI18N
@@ -294,7 +295,7 @@ public class CheckInPage extends javax.swing.JFrame {
         jID.setBackground(new java.awt.Color(246, 246, 246));
         jID.setFont(new java.awt.Font("Kannada MN", 0, 15)); // NOI18N
         jID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Select an ID Type -", "Voter's ID", "Driver's License", "Philippine National ID", "SSS ID", "Pag-Ibig ID", "TIN ID", "PhilHealth ID" }));
-        jID.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+        jID.setBorder(null);
         jID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jIDActionPerformed(evt);
@@ -307,17 +308,19 @@ public class CheckInPage extends javax.swing.JFrame {
         jTime.setBackground(new java.awt.Color(246, 246, 246));
         jTime.setFont(new java.awt.Font("Kannada MN", 0, 15)); // NOI18N
         jTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Select Time of Check In -", "1:00 ", "2:00 ", "3:00 ", "4:00 ", "5:00 ", "6:00 ", "7:00 ", "8:00 ", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00", " " }));
-        jTime.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+        jTime.setBorder(null);
         jTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTimeActionPerformed(evt);
             }
         });
 
+        jCalendar.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+
         jStay.setBackground(new java.awt.Color(246, 246, 246));
         jStay.setFont(new java.awt.Font("Kannada MN", 0, 15)); // NOI18N
         jStay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Select Days of Stay -", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jStay.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.lightGray, java.awt.Color.gray));
+        jStay.setBorder(null);
         jStay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jStayActionPerformed(evt);
@@ -386,7 +389,7 @@ public class CheckInPage extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -444,7 +447,7 @@ public class CheckInPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dashboard1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE))
+                    .addComponent(dashboard1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE))
                 .addContainerGap())
         );
 

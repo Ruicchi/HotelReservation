@@ -1,4 +1,3 @@
-
 package hotelreservation;
 
 import java.awt.Color;
@@ -22,17 +21,44 @@ public class Dashboard extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 =  new RoundedPanel(25, Color.WHITE)
-        ;
-        home = new hotelreservation.Button();
+        jPanel1 = new RoundedPanel(25, Color.WHITE);
         signout = new hotelreservation.Button();
         admin = new hotelreservation.Button();
+        home = new hotelreservation.Button();
 
-        setPreferredSize(new java.awt.Dimension(300, 650));
+        signout.setForeground(new java.awt.Color(255, 255, 255));
+        signout.setText("Sign Out");
+        signout.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
+        signout.setRadius(25);
+        signout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signoutMouseClicked(evt);
+            }
+        });
+        signout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signoutActionPerformed(evt);
+            }
+        });
+
+        admin.setForeground(new java.awt.Color(255, 255, 255));
+        admin.setText("Admin");
+        admin.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
+        admin.setRadius(25);
+        admin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                adminMouseClicked(evt);
+            }
+        });
+        admin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminActionPerformed(evt);
+            }
+        });
 
         home.setForeground(new java.awt.Color(255, 255, 255));
         home.setText("Home");
-        home.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        home.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
         home.setRadius(25);
         home.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -45,76 +71,49 @@ public class Dashboard extends javax.swing.JPanel {
             }
         });
 
-        signout.setForeground(new java.awt.Color(255, 255, 255));
-        signout.setText("Sign Out");
-        signout.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        signout.setRadius(25);
-        signout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                signoutMouseClicked(evt);
-            }
-        });
-
-        admin.setForeground(new java.awt.Color(255, 255, 255));
-        admin.setText("Admin");
-        admin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        admin.setRadius(25);
-        admin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                adminMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(admin, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(signout, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(signout, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(admin, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(admin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(signout, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(280, Short.MAX_VALUE))
+                .addGap(88, 88, 88)
+                .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(admin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(signout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeActionPerformed
-        HomePage hp = new HomePage();
-        hp.show();
-    }//GEN-LAST:event_homeActionPerformed
-
     private void adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminActionPerformed
-              // Open Admin Page when clicked
         AdminPage ap = new AdminPage();
         ap.show();
     }//GEN-LAST:event_adminActionPerformed
 
     private void signoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutActionPerformed
-        // Display a dialog box with yes/no options
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to Sign Out?", "Confirmation", JOptionPane.YES_NO_OPTION);
+    int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to Sign Out?", "Confirmation", JOptionPane.YES_NO_OPTION);
         
         // Check the user's choice
         if (choice == JOptionPane.YES_OPTION) {
@@ -124,13 +123,15 @@ public class Dashboard extends javax.swing.JPanel {
     }//GEN-LAST:event_signoutActionPerformed
 
     private void homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseClicked
-        HomePage hp = new HomePage();
-        hp.show();
-  
+
     }//GEN-LAST:event_homeMouseClicked
 
+    private void homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeActionPerformed
+        HomePage hp = new HomePage();
+        hp.show();
+    }//GEN-LAST:event_homeActionPerformed
+
     private void adminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminMouseClicked
-        // Open Admin Page when clicked
         AdminPage ap = new AdminPage();
         ap.show();
     }//GEN-LAST:event_adminMouseClicked
@@ -152,7 +153,7 @@ public class Dashboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private hotelreservation.Button signout;
     // End of variables declaration//GEN-END:variables
-    
+
     class RoundedPanel extends JPanel {
         private Color backgroundColor;
         private int cornerRadius = 15;
