@@ -46,10 +46,10 @@ public class RoomPage extends javax.swing.JFrame {
 
 // Method to fetch data from the database and return it as a DefaultTableModel
     private DefaultTableModel fetchRoomData() {
-    DefaultTableModel model = new DefaultTableModel(new String[]{"RoomClassification", "RoomNumber", "MaxGuest", "Inclusions", "Price", "NotAvailable"}, 0);
+    DefaultTableModel model = new DefaultTableModel(new String[]{"RoomClassification", "RoomNumber", "MaxGuest", "Inclusions", "Price", "Available"}, 0);
 
     try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "0000");
-         PreparedStatement stmt = con.prepareStatement("SELECT RoomClassification, RoomNumber, MaxGuest, Inclusions, Price, NotAvailable FROM addedroomdb");
+         PreparedStatement stmt = con.prepareStatement("SELECT RoomClassification, RoomNumber, MaxGuest, Inclusions, Price, Available FROM addedroomdb");
          ResultSet rs = stmt.executeQuery()) {
         
         while (rs.next()) {
@@ -58,11 +58,11 @@ public class RoomPage extends javax.swing.JFrame {
             String maxGuest = rs.getString("MaxGuest");
             String inclusions = rs.getString("Inclusions");
             String price = rs.getString("Price");
-            boolean notAvailable = rs.getBoolean("NotAvailable");
+            boolean Available = rs.getBoolean("Available");
 
-            System.out.println("Adding row: " + roomClassification + ", " + roomNumber + ", " + maxGuest + ", " + inclusions + ", " + price + ", "  + ", " + notAvailable);
+            System.out.println("Adding row: " + roomClassification + ", " + roomNumber + ", " + maxGuest + ", " + inclusions + ", " + price + ", "  + ", " + Available);
 
-            model.addRow(new Object[]{roomClassification, roomNumber, maxGuest, inclusions, price, notAvailable});
+            model.addRow(new Object[]{roomClassification, roomNumber, maxGuest, inclusions, price, Available});
         }
     } catch (SQLException ex) { 
         Logger.getLogger(RoomPage.class.getName()).log(Level.SEVERE, null, ex);

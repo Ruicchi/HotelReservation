@@ -268,9 +268,9 @@ public class SignInPage extends javax.swing.JFrame {
 
             // Will proceed if Sign in is successful
             if (rs.next()) {
-                AdminPage2 ap2 = new AdminPage2();
-                ap2.show();
-                dispose();
+                HomePage hp = new HomePage();
+                hp.show();
+                dispose();    
             } else {
                 // Failed Login
                 JOptionPane.showMessageDialog(this, "Invalid Employee ID or Password!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -295,9 +295,7 @@ public class SignInPage extends javax.swing.JFrame {
 
     private void SignInBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignInBtnMouseClicked
         // Open Home Page when clicked
-        HomePage hp = new HomePage();
-        hp.show();
-        dispose();                                                                         
+                                                                             
 
     }//GEN-LAST:event_SignInBtnMouseClicked
 
